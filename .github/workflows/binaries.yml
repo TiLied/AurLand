@@ -28,11 +28,13 @@ jobs:
         dotnet-version: 10.0.x
     - name: Restore dependencies
       run: dotnet restore
+    - name: Create directory
+      run: mkdir ./bin/archive
     - name: Build ${{ matrix.binary_name }} binary
       run: dotnet publish -r ${{ matrix.binary_name }} -c Release -o "./bin/AurLand-${{ matrix.binary_name }}" -p:DebugType=None -p:DebugSymbols=false
     - name: Archive ${{ matrix.binary_name }} binary
       run: tar -cvz -f ./bin/archive/AurLand-${{ matrix.binary_name }}.tar.gz -C ./bin/AurLand-${{ matrix.binary_name }} .
-    - name: Upload ${{ matrix.binary_name }} binary
+    - name: Upload artifact ${{ matrix.binary_name }} binary
       uses: actions/upload-artifact@v4
       with:
         name: AurLand-${{ matrix.binary_name }}.tar.gz
