@@ -29,7 +29,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Create directory
-      run: mkdir ./bin/archive
+      run: mkdir -p ./bin/archive
     - name: Build ${{ matrix.binary_name }} binary
       run: dotnet publish -r ${{ matrix.binary_name }} -c Release -o "./bin/AurLand-${{ matrix.binary_name }}" -p:DebugType=None -p:DebugSymbols=false
     - name: Archive ${{ matrix.binary_name }} binary
