@@ -45,6 +45,9 @@ jobs:
     permissions:
       contents: write
     steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
     - name: Get current tag
       run: echo "currentTag=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
     - name: Upload binaries to release
