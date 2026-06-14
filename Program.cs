@@ -23,7 +23,7 @@ public class Program
 	
 	private static Task<int> Main(string[] args)
 	{
-		RootCommand rootCommand = new("Aurland is an aur helper.");
+		RootCommand rootCommand = new("AurLand is an aur helper.");
 		
 		Option<string> dataPrefixAurData = new("--data-prefix", ["-dp"]);
 		
@@ -176,11 +176,11 @@ public class Program
 			Log.InfoLine("'--data-prefix' is empty. Using XDG_DATA_HOME.");
 			
 			aurLandData = Environment.GetEnvironmentVariable("XDG_DATA_HOME");
-			
-			Log.WarningLine(aurLandData ?? "XDG_DATA_HOME is null. Using HOME.");
-			
+
 			if(aurLandData == null || aurLandData == string.Empty)
 			{
+				Log.WarningLine("XDG_DATA_HOME is null. Using HOME.");
+				
 				aurLandData = Environment.GetEnvironmentVariable("HOME");
 				
 				if(aurLandData == null || aurLandData == string.Empty)
@@ -199,7 +199,7 @@ public class Program
 			return false;
 		}
 		
-		aurLandData += Path.Combine("AurLand");
+		aurLandData = Path.Combine(aurLandData, "AurLand");
 		
 		_ALDataPath = Path.GetFullPath(aurLandData);
 		
@@ -554,6 +554,19 @@ public class Program
 		}
 		
 		string packageDirectory = Path.Combine(_ALDataGitPath, package);
+		
+		//Printing PKGBUILD
+		Log.InfoLine($"printing PKGBUILD:");
+		using(FileStream pkgbuild = File.OpenRead(Path.Combine(packageDirectory, "PKGBUILD")))
+		{
+			using (StreamReader sr = new StreamReader(pkgbuild)) 
+			{
+				while (sr.Peek() >= 0)
+				{
+					Log.WriteLine($"{sr.ReadLine()}");
+				}
+			}
+		}
 		
 		string currentCommit = string.Empty;
 		
