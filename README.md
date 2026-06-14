@@ -1,12 +1,12 @@
 # AurLand
-Personal helper script for aur, automate downloading, installing, and updating aur packages. To download visit [releases](https://github.com/TiLied/AurLand/releases).
+Personal script/helper for aur to automate downloading, installing, and updating aur packages. To download visit [releases](https://github.com/TiLied/AurLand/releases).
 
 Uploading to github just to not lose the source code :)
 
 ## Requires:
-- pacman (-Qqm, -Rs)
-- makepkg (-si)
-- git (clone, pull, diff, rev-parse)
+- [pacman](https://archlinux.org/packages/?q=pacman) (-Qqm, -Rs)
+- [makepkg](https://archlinux.org/packages/?q=base-devel) (-si)
+- [git](https://archlinux.org/packages/?q=git) (clone, pull, diff, rev-parse)
 
 ## aurland --help:
 ```bash
